@@ -4,7 +4,14 @@ end
 service 'httpd' do
  action [:enable, :start] 
 end
-file '/var/www/html/index.html' do
- content ' <html> <h1>Mohan</h1> 
-           </html>'
+template 'var/www/html/index.html' do
+ source 'index.erb'
+ action :create 
+ variables(
+  :name => 'Mohanarao Gutta'
+ )
 end
+cookbook_file 'var/www/html/indexfromdefaultfile.html' do
+source 'index.html'
+end
+
